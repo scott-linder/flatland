@@ -1,56 +1,52 @@
 #include <memory>
-#include <utility>
-#include <Box2D/Box2D.h>
+#include <entityx/entityx.h>
 #include <SFML/Graphics.hpp>
-#include "util.hh"
-#include "entity.hh"
-#include "player.hh"
+#include <Box2D/Box2D.h>
 #include "asteroids.hh"
+#include "physics.hh"
+#include "physics_system.hh"
+#include "debug_system.hh"
+#include "draw_system.hh"
 
 namespace as {
 
 const b2Vec2 Asteroids::kGravity{0.0f, -10.0f};
-const float32 Asteroids::kTimeStep = 1.0f / 60.0f;
-const int32 Asteroids::kVelocityIterations = 6,
-            Asteroids::kPositionIterations = 2;
 
-Asteroids::Asteroids()
-    : pending_time_(0.0f)
-    , world_(Asteroids::kGravity)
-{
-    addEntity(std::make_unique<as::Player>(&world_, 1));
-
-    b2BodyDef ground_body_def;
-    ground_body_def.position.Set(0.0f, -5.0f);
-    b2Body* ground_body = world_.CreateBody(&ground_body_def);
-    b2PolygonShape ground_box;
-    ground_box.SetAsBox(50.0f, 1.0f);
-    ground_body->CreateFixture(&ground_box, 0.0f);
-}
+Asteroids::Asteroids(std::shared_ptr<sf::RenderTarget> target,
+        entityx::ptr<entityx::EventManager> events,
+        entityx::ptr<entityx::EntityManager> entities,
+        entityx::ptr<entityx::SystemManager> systems)
+    : world_(std::make_shared<b2World>(kGravity))
+    , target_(target)
+    , events_(events)
+    , entities_(entities)
+    , systems_(systems)
+{}
 
 Asteroids::~Asteroids()
 {}
 
-auto Asteroids::update(float delta_t) -> void {
-    // We use a fixed physics-sim timestep
-    pending_time_ += delta_t;
-    while (pending_time_ >= kTimeStep) {
-        world_.Step(kTimeStep, kVelocityIterations, kPositionIterations);
-        pending_time_ -= kTimeStep;
-    }
-    for (auto &entity : entities_) {
-        entity->update(delta_t);
-    }
+auto Asteroids::configure() -> void {
+    systems_->add<PhysicsSystem>(world_);
+    systems_->add<DebugSystem>();
+    systems_->add<DrawSystem>(target_);
+    systems_->configure();
 }
 
-auto Asteroids::draw(sf::RenderTarget& target, sf::RenderStates states) const -> void {
-    for (auto &entity : entities_) {
-        entity->draw(target, states);
-    }
+auto Asteroids::initialize() -> void {
+    b2BodyDef body_def;
+    body_def.type = b2_dynamicBody;
+    body_def.position.Set(0.0f, 0.0f);
+    auto entity = entities_->create();
+    auto body = std::shared_ptr<b2Body>(world_->CreateBody(&body_def),
+            [this](b2Body *body) { world_->DestroyBody(body); });
+    entity.assign<Physics>(body);
 }
 
-auto Asteroids::addEntity(std::unique_ptr<as::Entity> entity) -> void {
-    entities_.push_back(std::move(entity));
+auto Asteroids::update(double dt) -> void {
+    systems_->update<PhysicsSystem>(dt);
+    systems_->update<DebugSystem>(dt);
+    systems_->update<DrawSystem>(dt);
 }
 
 } /* namespace as */

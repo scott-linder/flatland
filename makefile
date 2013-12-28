@@ -1,13 +1,13 @@
 CXX=clang++
 CXX_FLAGS=-std=c++11 -g -Werror -Wall
-CXX_LIBS=-lsfml-graphics -lsfml-system -lsfml-window -lBox2D
+CXX_LIBS=-lsfml-graphics -lsfml-system -lsfml-window -lBox2D -lentityx
 
 BIN=asteroids
 
 IN=src/
 OUT=obj/
 
-OBJS=main.o entity.o player.o asteroids.o vector2.o
+OBJS=main.o asteroids.o vector2.o physics.o physics_system.o
 OBJS:=$(addprefix $(OUT), $(OBJS))
 
 all: $(BIN)

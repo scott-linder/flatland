@@ -1,11 +1,8 @@
 #ifndef AS_SDRAW_HH
 #define AS_SDRAW_HH
 
-#include <iostream>
 #include <entityx/entityx.h>
 #include <SFML/Graphics.hpp>
-#include "CPhysics.hh"
-#include "conversions.hh"
 
 namespace as {
 

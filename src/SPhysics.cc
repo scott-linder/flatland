@@ -1,5 +1,8 @@
 #include <memory>
 #include <Box2D/Box2D.h>
+#include "conversions.hh"
+#include "CPosition.hh"
+#include "CRotation.hh"
 #include "CPhysics.hh"
 #include "SPhysics.hh"
 
@@ -21,6 +24,18 @@ auto SPhysics::update(entityx::ptr<entityx::EntityManager> entities,
     while (pending_time_ > kTimeStep) {
         world_->Step(kTimeStep, kVelocityIterations, kPositionIterations);
         pending_time_ -= kTimeStep;
+    }
+
+    for (auto entity
+            : entities->entities_with_components<CPhysics, CPosition, CRotation>()) {
+        auto position = entity.component<CPosition>();
+        auto angle = entity.component<CRotation>();
+        auto physics = entity.component<CPhysics>();
+
+        position->x = physics->body->GetPosition().x;
+        position->y = physics->body->GetPosition().y;
+
+        angle->degrees = toDegrees(physics->body->GetAngle());
     }
 }
 

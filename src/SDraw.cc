@@ -1,3 +1,7 @@
+#include <SFML/Graphics.hpp>
+#include "conversions.hh"
+#include "CPosition.hh"
+#include "CRotation.hh"
 #include "SDraw.hh"
 
 namespace as {
@@ -11,15 +15,14 @@ auto SDraw::update(entityx::ptr<entityx::EntityManager> entities,
             entityx::ptr<entityx::EventManager> events,
             double dt) -> void {
 
-    for (auto entity : entities->entities_with_components<CPhysics>()) {
-        auto physics = entity.component<CPhysics>();
-        auto position = toPixels(physics->body->GetPosition());
-        auto rotation = toDegrees(physics->body->GetAngle());
+    for (auto entity : entities->entities_with_components<CPosition, CRotation>()) {
+        auto position = entity.component<CPosition>();
+        auto rotation = entity.component<CRotation>();
 
         sf::Transformable physics_transformable;
-        physics_transformable.setPosition(position);
+        physics_transformable.setPosition(toPixels({position->x, position->y}));
         physics_transformable.setScale(kPixelsPerMeter, kPixelsPerMeter);
-        physics_transformable.setRotation(rotation);
+        physics_transformable.setRotation(rotation->degrees);
         target_->draw(circle_, physics_transformable.getTransform());
     }
 }

@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
 #include "Asteroids.hh"
+#include "CPosition.hh"
+#include "CRotation.hh"
 #include "CPhysics.hh"
 #include "SPhysics.hh"
 #include "SDebug.hh"

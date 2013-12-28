@@ -7,7 +7,9 @@ BIN=asteroids
 IN=src/
 OUT=obj/
 
-OBJS=main.o asteroids.o vector2.o physics.o physics_system.o
+OBJS=main.o Asteroids.o Vector2.o
+OBJS+=CPhysics.o
+OBJS+=SPhysics.o SDebug.o SDraw.o
 OBJS:=$(addprefix $(OUT), $(OBJS))
 
 all: $(BIN)

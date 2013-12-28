@@ -2,7 +2,7 @@
 #include <entityx/entityx.h>
 #include <Box2D/Box2D.h>
 #include <SFML/Graphics.hpp>
-#include "asteroids.hh"
+#include "Asteroids.hh"
 
 auto main(int argc, char *argv[]) -> int {
     sf::VideoMode video_mode(800, 600);

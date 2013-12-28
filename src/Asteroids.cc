@@ -2,11 +2,11 @@
 #include <entityx/entityx.h>
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
-#include "asteroids.hh"
-#include "physics.hh"
-#include "physics_system.hh"
-#include "debug_system.hh"
-#include "draw_system.hh"
+#include "Asteroids.hh"
+#include "CPhysics.hh"
+#include "SPhysics.hh"
+#include "SDebug.hh"
+#include "SDraw.hh"
 
 namespace as {
 
@@ -27,9 +27,9 @@ Asteroids::~Asteroids()
 {}
 
 auto Asteroids::configure() -> void {
-    systems_->add<PhysicsSystem>(world_);
-    systems_->add<DebugSystem>();
-    systems_->add<DrawSystem>(target_);
+    systems_->add<SPhysics>(world_);
+    systems_->add<SDebug>();
+    systems_->add<SDraw>(target_);
     systems_->configure();
 }
 
@@ -40,13 +40,13 @@ auto Asteroids::initialize() -> void {
     auto entity = entities_->create();
     auto body = std::shared_ptr<b2Body>(world_->CreateBody(&body_def),
             [this](b2Body *body) { world_->DestroyBody(body); });
-    entity.assign<Physics>(body);
+    entity.assign<CPhysics>(body);
 }
 
 auto Asteroids::update(double dt) -> void {
-    systems_->update<PhysicsSystem>(dt);
-    systems_->update<DebugSystem>(dt);
-    systems_->update<DrawSystem>(dt);
+    systems_->update<SPhysics>(dt);
+    systems_->update<SDebug>(dt);
+    systems_->update<SDraw>(dt);
 }
 
 } /* namespace as */

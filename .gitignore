@@ -2,3 +2,4 @@ asteroids
 obj/
 src/.clang_complete
 *.tmp
+*.swp

@@ -5,16 +5,18 @@
 #include <entityx/entityx.h>
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
+#include "ECollision.hh"
 
 namespace as {
 
-class Asteroids : public entityx::Manager {
+class Asteroids : public entityx::Manager, public entityx::Receiver<Asteroids> {
 public:
     Asteroids(std::shared_ptr<sf::RenderTarget> target,
             entityx::ptr<entityx::EventManager> events,
             entityx::ptr<entityx::EntityManager> entities,
             entityx::ptr<entityx::SystemManager> systems);
     ~Asteroids();
+    auto receive(const as::ECollision &event) -> void;
 protected:
     auto configure() -> void;
     auto initialize() -> void;

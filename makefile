@@ -10,6 +10,7 @@ OUT=obj/
 OBJS=main.o Asteroids.o Vector2.o
 OBJS+=CPhysics.o CPosition.o CRotation.o
 OBJS+=SPhysics.o SDebug.o SDraw.o
+OBJS+=ECollision.o
 OBJS:=$(addprefix $(OUT), $(OBJS))
 
 all: $(BIN)

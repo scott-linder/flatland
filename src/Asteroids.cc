@@ -46,9 +46,12 @@ auto Asteroids::initialize() -> void {
     dynamic_body_def.position.Set(0.0f, 0.0f);
     auto dynamic_entity = entities_->create();
     auto dynamic_body = std::shared_ptr<b2Body>(world_->CreateBody(&dynamic_body_def),
-            [this](b2Body *body) { world_->DestroyBody(body); });
+            [this](b2Body *body)
+            { delete static_cast<entityx::Entity*>(body->GetUserData());
+                world_->DestroyBody(body); });
     dynamic_body->CreateFixture(&circle, 0.0f);
     // TODO who owns this entity? how does it get deleted?
+    // idea: move above creation of b2Body shared_ptr and use deleter to clean up?
     dynamic_body->SetUserData(new entityx::Entity(dynamic_entity));
     dynamic_entity.assign<CPhysics>(dynamic_body);
 
@@ -57,9 +60,12 @@ auto Asteroids::initialize() -> void {
     static_body_def.position.Set(0.0f, -3.0f);
     auto static_entity = entities_->create();
     auto static_body = std::shared_ptr<b2Body>(world_->CreateBody(&static_body_def),
-            [this](b2Body *body) { world_->DestroyBody(body); });
+            [this](b2Body *body)
+            { delete static_cast<entityx::Entity*>(body->GetUserData());
+                world_->DestroyBody(body); });
     static_body->CreateFixture(&circle, 0.0f);
     // TODO who owns this entity? how does it get deleted?
+    // idea: move above creation of b2Body shared_ptr and use deleter to clean up?
     static_body->SetUserData(new entityx::Entity(static_entity));
     static_entity.assign<CPhysics>(static_body);
 }

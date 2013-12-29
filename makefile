@@ -7,11 +7,13 @@ BIN=asteroids
 IN=src/
 OUT=obj/
 
-OBJS=main.o Asteroids.o Vector2.o
-OBJS+=CPhysics.o CPosition.o CRotation.o
-OBJS+=SPhysics.o SDebug.o SDraw.o
-OBJS+=ECollision.o
+OBJS=main Asteroids Vector2
+OBJS+=CPhysics CPosition CRotation
+OBJS+=SPhysics SDebug SDraw
+OBJS+=ECollision
+
 OBJS:=$(addprefix $(OUT), $(OBJS))
+OBJS:=$(addsuffix .o, $(OBJS))
 
 all: $(BIN)
 

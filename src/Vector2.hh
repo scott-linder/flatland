@@ -28,9 +28,7 @@ public:
 private:
 };
 
-auto worldToPixels(const b2Vec2 &v) -> sf::Vector2f;
-
 } /* namespace as */
 
-#endif /* AS_VECTOR_HH */
+#endif /* AS_VECTOR2_HH */
 

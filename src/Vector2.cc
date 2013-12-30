@@ -48,9 +48,4 @@ auto Vector2::operator*=(float right) -> void {
     y *= right;
 }
 
-
-auto worldToPixels(const b2Vec2 &v) -> sf::Vector2f {
-    return {v.x, -v.y};
-}
-
 } /* namespace as */

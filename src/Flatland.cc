@@ -40,6 +40,11 @@ auto Flatland::configure() -> void {
     events_->subscribe<fl::ECollision>(*this);
 }
 
+/**
+ * \param position Where the entity should enter the world, expressed in 
+ * meters relative to the origin.
+ * \param dynamic Whether the entity should respond to physical stimulus.
+ */
 auto Flatland::createEntity(Vector2 position, bool dynamic) -> void {
     auto entity = entities_->create();
 

@@ -6,10 +6,15 @@
 
 namespace fl {
 
+/// Position of an entity.
+/** Must be represented in meters.
+ */
 struct CPosition : public entityx::Component<CPosition> {
+    /// Ctor.
     CPosition(float x = 0, float y = 0);
 
-    float x, y;
+    float x, ///< X-axis component.
+          y; ///< Y-axis component.
 };
 
 } /* namespace fl */

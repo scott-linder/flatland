@@ -7,10 +7,16 @@
 
 namespace fl {
 
+/// Drawable element of an entity.
 struct CDrawable : entityx::Component<CDrawable> {
+    /// Ctor.
+    /** drawable is guaranteed to be valid.
+     */
     CDrawable();
+    /// Ctor.
     CDrawable(std::shared_ptr<sf::Drawable> drawable);
 
+    /// Drawable element of an entity.
     std::shared_ptr<sf::Drawable> drawable;
 };
 

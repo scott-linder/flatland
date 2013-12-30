@@ -6,10 +6,14 @@
 
 namespace fl {
 
+/// Rotation (angle) of entity.
+/** Must be in degrees from X-axis in CCW direction.
+ */
 struct CRotation : public entityx::Component<CRotation> {
+    /// Ctor.
     CRotation(float degrees = 0);
 
-    float degrees;
+    float degrees; ///< Rotation of entity.
 };
 
 } /* namespace fl */

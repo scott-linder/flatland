@@ -5,6 +5,7 @@
 #include <entityx/entityx.h>
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
+#include "Vector2.hh"
 #include "ECollision.hh"
 
 namespace as {

@@ -5,7 +5,7 @@
 #include "CRotation.hh"
 #include "SDebug.hh"
 
-namespace as {
+namespace fl {
 
 SDebug::SDebug()
 {}
@@ -38,5 +38,5 @@ auto SDebug::receive(const entityx::EntityDestroyedEvent &event) -> void {
     std::cout << event.entity << " Destroyed" << std::endl; 
 }
 
-} /* namespace as */
+} /* namespace fl */
 

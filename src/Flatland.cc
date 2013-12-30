@@ -12,13 +12,13 @@
 #include "SDebug.hh"
 #include "SDraw.hh"
 #include "ECollision.hh"
-#include "Asteroids.hh"
+#include "Flatland.hh"
 
-namespace as {
+namespace fl {
 
-const b2Vec2 Asteroids::kGravity{0.0f, -10.0f};
+const b2Vec2 Flatland::kGravity{0.0f, -10.0f};
 
-Asteroids::Asteroids(std::shared_ptr<sf::RenderTarget> target,
+Flatland::Flatland(std::shared_ptr<sf::RenderTarget> target,
         entityx::ptr<entityx::EventManager> events,
         entityx::ptr<entityx::EntityManager> entities,
         entityx::ptr<entityx::SystemManager> systems)
@@ -29,18 +29,18 @@ Asteroids::Asteroids(std::shared_ptr<sf::RenderTarget> target,
     , systems_(systems)
 {}
 
-Asteroids::~Asteroids()
+Flatland::~Flatland()
 {}
 
-auto Asteroids::configure() -> void {
+auto Flatland::configure() -> void {
     systems_->add<SPhysics>(world_);
     systems_->add<SDebug>();
     systems_->add<SDraw>(target_);
     systems_->configure();
-    events_->subscribe<as::ECollision>(*this);
+    events_->subscribe<fl::ECollision>(*this);
 }
 
-auto Asteroids::createEntity(Vector2 position, bool dynamic) -> void {
+auto Flatland::createEntity(Vector2 position, bool dynamic) -> void {
     auto entity = entities_->create();
 
     auto draw_shape = std::make_shared<sf::CircleShape>(0.5f);
@@ -66,18 +66,18 @@ auto Asteroids::createEntity(Vector2 position, bool dynamic) -> void {
     entity.assign<CDrawable>(draw_shape);
 }
 
-auto Asteroids::initialize() -> void {
+auto Flatland::initialize() -> void {
     createEntity({0.0f, 0.0f}, true);
     createEntity({0.0f, -3.0f}, false);
 }
 
-auto Asteroids::update(double dt) -> void {
+auto Flatland::update(double dt) -> void {
     systems_->update<SPhysics>(dt);
     systems_->update<SDebug>(dt);
     systems_->update<SDraw>(dt);
 }
 
-auto Asteroids::receive(const as::ECollision &event) -> void {
+auto Flatland::receive(const fl::ECollision &event) -> void {
     std::cout << "Collision received: " << std::endl
         << "->A: " << event.entity_a << std::endl
         << "->B: " << event.entity_b << std::endl;
@@ -85,5 +85,5 @@ auto Asteroids::receive(const as::ECollision &event) -> void {
     entities_->get(event.entity_b.id()).destroy();
 }
 
-} /* namespace as */
+} /* namespace fl */
 

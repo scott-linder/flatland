@@ -2,12 +2,12 @@ CXX=clang++
 CXX_FLAGS=-std=c++11 -g -Werror -Wall
 CXX_LIBS=-lsfml-graphics -lsfml-system -lsfml-window -lBox2D -lentityx
 
-BIN=asteroids
+BIN=flatland
 
 IN=src/
 OUT=obj/
 
-OBJS=main Asteroids Vector2
+OBJS=main Flatland Vector2
 OBJS+=CPhysics CPosition CRotation CDrawable
 OBJS+=SPhysics SDebug SDraw
 OBJS+=ECollision

@@ -5,7 +5,7 @@
 #include <entityx/entityx.h>
 #include <SFML/Graphics.hpp>
 
-namespace as {
+namespace fl {
 
 struct CDrawable : entityx::Component<CDrawable> {
     CDrawable();
@@ -14,7 +14,7 @@ struct CDrawable : entityx::Component<CDrawable> {
     std::shared_ptr<sf::Drawable> drawable;
 };
 
-} /* namespace as */
+} /* namespace fl */
 
 #endif /* AS_CDRAWABLE_HH */
 

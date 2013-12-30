@@ -4,7 +4,7 @@
 #include <entityx/entityx.h>
 #include <Box2D/Box2D.h>
 
-namespace as {
+namespace fl {
 
 struct CPosition : public entityx::Component<CPosition> {
     CPosition(float x = 0, float y = 0);
@@ -12,7 +12,7 @@ struct CPosition : public entityx::Component<CPosition> {
     float x, y;
 };
 
-} /* namespace as */
+} /* namespace fl */
 
 #endif /* AS_POSITION_HH */
 

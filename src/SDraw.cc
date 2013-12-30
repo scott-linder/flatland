@@ -5,7 +5,7 @@
 #include "CDrawable.hh"
 #include "SDraw.hh"
 
-namespace as {
+namespace fl {
 
 SDraw::SDraw(std::shared_ptr<sf::RenderTarget> target)
     : target_(target)
@@ -28,5 +28,5 @@ auto SDraw::update(entityx::ptr<entityx::EntityManager> entities,
     }
 }
 
-} /* namespace as */
+} /* namespace fl */
 

@@ -5,7 +5,7 @@
 #include <entityx/entityx.h>
 #include "CPhysics.hh"
 
-namespace as {
+namespace fl {
 
 class SDebug : public entityx::System<SDebug>, public entityx::Receiver<SDebug> {
 public:
@@ -19,7 +19,7 @@ public:
 private:
 };
 
-} /* namespace as */
+} /* namespace fl */
 
 #endif /* AS_SDEBUG_HH */
 

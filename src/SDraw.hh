@@ -4,7 +4,7 @@
 #include <entityx/entityx.h>
 #include <SFML/Graphics.hpp>
 
-namespace as {
+namespace fl {
 
 class SDraw : public entityx::System<SDraw> {
 public:
@@ -16,7 +16,7 @@ private:
     std::shared_ptr<sf::RenderTarget> target_;
 };
 
-} /* namespace as */
+} /* namespace fl */
 
 #endif /* AS_SDRAW_HH */
 

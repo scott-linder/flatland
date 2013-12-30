@@ -8,16 +8,16 @@
 #include "Vector2.hh"
 #include "ECollision.hh"
 
-namespace as {
+namespace fl {
 
-class Asteroids : public entityx::Manager, public entityx::Receiver<Asteroids> {
+class Flatland : public entityx::Manager, public entityx::Receiver<Flatland> {
 public:
-    Asteroids(std::shared_ptr<sf::RenderTarget> target,
+    Flatland(std::shared_ptr<sf::RenderTarget> target,
             entityx::ptr<entityx::EventManager> events,
             entityx::ptr<entityx::EntityManager> entities,
             entityx::ptr<entityx::SystemManager> systems);
-    ~Asteroids();
-    auto receive(const as::ECollision &event) -> void;
+    ~Flatland();
+    auto receive(const fl::ECollision &event) -> void;
     auto createEntity(Vector2 position, bool dynamic) -> void;
 protected:
     auto configure() -> void;
@@ -32,7 +32,7 @@ private:
     entityx::ptr<entityx::SystemManager> systems_;
 };
 
-} /* namespace as */
+} /* namespace fl */
 
 #endif /* AS_ASTEROIDS_HH */
 

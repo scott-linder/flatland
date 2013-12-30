@@ -3,7 +3,7 @@
 
 #include <entityx/entityx.h>
 
-namespace as {
+namespace fl {
 
 struct ECollision : entityx::Event<ECollision> {
     ECollision(entityx::Entity entity_a, entityx::Entity entity_b);
@@ -11,7 +11,7 @@ struct ECollision : entityx::Event<ECollision> {
     entityx::Entity entity_a, entity_b;
 };
 
-} /* namespace as */
+} /* namespace fl */
 
 #endif /* AS_ECOLLISION_HH */
 

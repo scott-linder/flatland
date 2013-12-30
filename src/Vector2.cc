@@ -1,6 +1,6 @@
 #include "Vector2.hh"
 
-namespace as {
+namespace fl {
 
 Vector2::Vector2()
     : Vector2(0, 0)
@@ -48,4 +48,4 @@ auto Vector2::operator*=(float right) -> void {
     y *= right;
 }
 
-} /* namespace as */
+} /* namespace fl */

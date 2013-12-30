@@ -4,7 +4,7 @@
 #include <entityx/entityx.h>
 #include <Box2D/Box2D.h>
 
-namespace as {
+namespace fl {
 
 struct CPhysics : public entityx::Component<CPhysics> {
     CPhysics();
@@ -13,7 +13,7 @@ struct CPhysics : public entityx::Component<CPhysics> {
     std::shared_ptr<b2Body> body;
 };
 
-} /* namespace as */
+} /* namespace fl */
 
 #endif /* AS_PHYSICS_HH */
 

@@ -8,7 +8,7 @@
 #include "SPhysics.hh"
 #include "ECollision.hh"
 
-namespace as {
+namespace fl {
 
 const float32 SPhysics::kTimeStep = 1.0f / 60.0f;
 const int32 SPhysics::kVelocityIterations = 6,
@@ -31,7 +31,7 @@ auto SPhysics::update(entityx::ptr<entityx::EntityManager> entities,
     }
 
     for (auto entities : pending_collision_) {
-        events->emit<as::ECollision>(entities.first, entities.second);
+        events->emit<fl::ECollision>(entities.first, entities.second);
     }
     pending_collision_.clear();
 
@@ -59,5 +59,5 @@ auto SPhysics::BeginContact(b2Contact *contact) -> void {
     pending_collision_.push_back(std::make_pair(entity_a, entity_b));
 }
 
-} /* namespace as */
+} /* namespace fl */
 

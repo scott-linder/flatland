@@ -4,7 +4,7 @@
 #include <Box2D/Box2D.h>
 #include <SFML/Graphics.hpp>
 
-namespace as {
+namespace fl {
 
 class Vector2 {
 public:
@@ -28,7 +28,7 @@ public:
 private:
 };
 
-} /* namespace as */
+} /* namespace fl */
 
 #endif /* AS_VECTOR2_HH */
 

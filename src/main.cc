@@ -7,11 +7,11 @@
 #include "CRotation.hh"
 #include "CPhysics.hh"
 #include "CDrawable.hh"
-#include "Asteroids.hh"
+#include "Flatland.hh"
 
 auto main(int argc, char *argv[]) -> int {
     sf::VideoMode video_mode(800, 600);
-    auto render_window = std::make_shared<sf::RenderWindow>(video_mode, "SFML - Asteroids");
+    auto render_window = std::make_shared<sf::RenderWindow>(video_mode, "SFML - Flatland");
     render_window->setVerticalSyncEnabled(true);
     sf::Clock clock;
 
@@ -19,11 +19,11 @@ auto main(int argc, char *argv[]) -> int {
     auto entities = entityx::make_ptr<entityx::EntityManager>(events);
     auto systems = entityx::make_ptr<entityx::SystemManager>(entities, events);
 
-    systems->add<entityx::deps::Dependency<as::CPhysics, as::CPosition, as::CRotation>>();
-    systems->add<entityx::deps::Dependency<as::CDrawable, as::CPosition, as::CRotation>>();
+    systems->add<entityx::deps::Dependency<fl::CPhysics, fl::CPosition, fl::CRotation>>();
+    systems->add<entityx::deps::Dependency<fl::CDrawable, fl::CPosition, fl::CRotation>>();
 
-    as::Asteroids asteroids(render_window, events, entities, systems);
-    asteroids.start();
+    fl::Flatland flatland(render_window, events, entities, systems);
+    flatland.start();
 
     while (render_window->isOpen()) {
         {
@@ -37,7 +37,7 @@ auto main(int argc, char *argv[]) -> int {
 
         render_window->clear(sf::Color::Black);
 
-        asteroids.step(clock.restart().asSeconds());
+        flatland.step(clock.restart().asSeconds());
 
         render_window->display();
     }

@@ -7,7 +7,7 @@
 #include <entityx/entityx.h>
 #include <Box2D/Box2D.h>
 
-namespace as {
+namespace fl {
 
 class SPhysics : public entityx::System<SPhysics> , public b2ContactListener {
 public:
@@ -25,7 +25,7 @@ private:
     std::vector<std::pair<entityx::Entity, entityx::Entity>> pending_collision_;
 };
 
-} /* namespace as */
+} /* namespace fl */
 
 #endif /* AS_SPHYSICS_HH */
 

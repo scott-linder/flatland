@@ -4,7 +4,7 @@
 #include <entityx/entityx.h>
 #include <Box2D/Box2D.h>
 
-namespace as {
+namespace fl {
 
 struct CRotation : public entityx::Component<CRotation> {
     CRotation(float degrees = 0);
@@ -12,7 +12,7 @@ struct CRotation : public entityx::Component<CRotation> {
     float degrees;
 };
 
-} /* namespace as */
+} /* namespace fl */
 
 #endif /* AS_ANGLE_HH */
 

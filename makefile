@@ -8,7 +8,7 @@ IN=src/
 OUT=obj/
 
 OBJS=main Asteroids Vector2
-OBJS+=CPhysics CPosition CRotation
+OBJS+=CPhysics CPosition CRotation CDrawable
 OBJS+=SPhysics SDebug SDraw
 OBJS+=ECollision
 

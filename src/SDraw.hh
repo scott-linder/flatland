@@ -14,7 +14,6 @@ public:
                 double dt) -> void final;
 private:
     std::shared_ptr<sf::RenderTarget> target_;
-    sf::CircleShape circle_;
 };
 
 } /* namespace as */

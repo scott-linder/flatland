@@ -17,6 +17,7 @@ public:
             entityx::ptr<entityx::SystemManager> systems);
     ~Asteroids();
     auto receive(const as::ECollision &event) -> void;
+    auto createEntity(Vector2 position, bool dynamic) -> void;
 protected:
     auto configure() -> void;
     auto initialize() -> void;

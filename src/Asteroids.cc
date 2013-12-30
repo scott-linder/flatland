@@ -3,9 +3,11 @@
 #include <entityx/entityx.h>
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
+#include "Vector2.hh"
 #include "CPosition.hh"
 #include "CRotation.hh"
 #include "CPhysics.hh"
+#include "CDrawable.hh"
 #include "SPhysics.hh"
 #include "SDebug.hh"
 #include "SDraw.hh"
@@ -38,36 +40,35 @@ auto Asteroids::configure() -> void {
     events_->subscribe<as::ECollision>(*this);
 }
 
-auto Asteroids::initialize() -> void {
-    b2CircleShape circle;
-    circle.m_radius = 0.5f;
-    b2BodyDef dynamic_body_def;
-    dynamic_body_def.type = b2_dynamicBody;
-    dynamic_body_def.position.Set(0.0f, 0.0f);
-    auto dynamic_entity = entities_->create();
-    auto dynamic_body = std::shared_ptr<b2Body>(world_->CreateBody(&dynamic_body_def),
-            [this](b2Body *body)
-            { delete static_cast<entityx::Entity*>(body->GetUserData());
-                world_->DestroyBody(body); });
-    dynamic_body->CreateFixture(&circle, 0.0f);
-    // TODO who owns this entity? how does it get deleted?
-    // idea: move above creation of b2Body shared_ptr and use deleter to clean up?
-    dynamic_body->SetUserData(new entityx::Entity(dynamic_entity));
-    dynamic_entity.assign<CPhysics>(dynamic_body);
+auto Asteroids::createEntity(Vector2 position, bool dynamic) -> void {
+    auto entity = entities_->create();
 
-    b2BodyDef static_body_def;
-    static_body_def.type = b2_staticBody;
-    static_body_def.position.Set(0.0f, -3.0f);
-    auto static_entity = entities_->create();
-    auto static_body = std::shared_ptr<b2Body>(world_->CreateBody(&static_body_def),
+    auto draw_shape = std::make_shared<sf::CircleShape>(0.5f);
+
+    /*
+    b2PolygonShape phys_shape;
+    phys_shape.Set(shape, shape.count);
+    */
+    b2CircleShape phys_shape;
+    phys_shape.m_radius = 0.5f;
+
+    b2BodyDef phys_body_def;
+    phys_body_def.type = dynamic ? b2_dynamicBody : b2_staticBody;
+    phys_body_def.position = position;
+    auto phys_body = std::shared_ptr<b2Body>(world_->CreateBody(&phys_body_def),
             [this](b2Body *body)
             { delete static_cast<entityx::Entity*>(body->GetUserData());
                 world_->DestroyBody(body); });
-    static_body->CreateFixture(&circle, 0.0f);
-    // TODO who owns this entity? how does it get deleted?
-    // idea: move above creation of b2Body shared_ptr and use deleter to clean up?
-    static_body->SetUserData(new entityx::Entity(static_entity));
-    static_entity.assign<CPhysics>(static_body);
+    phys_body->CreateFixture(&phys_shape, 1.0f);
+    phys_body->SetUserData(new entityx::Entity(entity));
+
+    entity.assign<CPhysics>(phys_body);
+    entity.assign<CDrawable>(draw_shape);
+}
+
+auto Asteroids::initialize() -> void {
+    createEntity({0.0f, 0.0f}, true);
+    createEntity({0.0f, -3.0f}, false);
 }
 
 auto Asteroids::update(double dt) -> void {

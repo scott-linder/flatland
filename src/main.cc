@@ -6,6 +6,7 @@
 #include "CPosition.hh"
 #include "CRotation.hh"
 #include "CPhysics.hh"
+#include "CDrawable.hh"
 #include "Asteroids.hh"
 
 auto main(int argc, char *argv[]) -> int {
@@ -19,6 +20,7 @@ auto main(int argc, char *argv[]) -> int {
     auto systems = entityx::make_ptr<entityx::SystemManager>(entities, events);
 
     systems->add<entityx::deps::Dependency<as::CPhysics, as::CPosition, as::CRotation>>();
+    systems->add<entityx::deps::Dependency<as::CDrawable, as::CPosition, as::CRotation>>();
 
     as::Asteroids asteroids(render_window, events, entities, systems);
     asteroids.start();

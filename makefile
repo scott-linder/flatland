@@ -15,6 +15,8 @@ OBJS+=ECollision
 OBJS:=$(addprefix $(OUT), $(OBJS))
 OBJS:=$(addsuffix .o, $(OBJS))
 
+DOCS=docs/
+
 all: $(BIN)
 
 $(BIN): $(OBJS)
@@ -28,7 +30,11 @@ $(OBJS): | $(OUT)
 $(OUT):
 	[ -d $(OUT) ] || mkdir $(OUT)
 
+docs:
+	doxygen Doxyfile
+
 clean:
 	-rm -f $(OBJS)
 	[ ! -d $(OUT) ] || rmdir $(OUT)
 	-rm -f $(BIN)
+	-rm -rf $(DOCS)

@@ -14,10 +14,10 @@ struct CDrawable : entityx::Component<CDrawable> {
      */
     CDrawable();
     /// Ctor.
-    CDrawable(std::shared_ptr<sf::Drawable> drawable);
+    CDrawable(std::unique_ptr<sf::Drawable> drawable);
 
     /// Drawable element of an entity.
-    std::shared_ptr<sf::Drawable> drawable;
+    std::unique_ptr<sf::Drawable> drawable;
 };
 
 } /* namespace fl */

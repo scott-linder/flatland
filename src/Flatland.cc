@@ -3,6 +3,7 @@
 #include <entityx/entityx.h>
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
+#include "util.hh"
 #include "Vector2.hh"
 #include "CPosition.hh"
 #include "CRotation.hh"
@@ -48,7 +49,7 @@ auto Flatland::configure() -> void {
 auto Flatland::createEntity(Vector2 position, bool dynamic) -> void {
     auto entity = entities_->create();
 
-    auto draw_shape = std::make_shared<sf::CircleShape>(0.5f);
+    auto draw_shape = std::unique_ptr<sf::Drawable>(new sf::CircleShape(0.5f));
 
     /*
     b2PolygonShape phys_shape;
@@ -68,7 +69,7 @@ auto Flatland::createEntity(Vector2 position, bool dynamic) -> void {
     phys_body->SetUserData(new entityx::Entity(entity));
 
     entity.assign<CPhysics>(phys_body);
-    entity.assign<CDrawable>(draw_shape);
+    entity.assign<CDrawable>(std::move(draw_shape));
 }
 
 auto Flatland::initialize() -> void {

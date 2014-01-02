@@ -18,13 +18,13 @@ auto SDraw::update(entityx::ptr<entityx::EntityManager> entities,
     for (auto entity : entities->entities_with_components<CPosition, CRotation, CDrawable>()) {
         auto position = entity.component<CPosition>();
         auto rotation = entity.component<CRotation>();
-        auto drawable = entity.component<CDrawable>()->drawable;
+        auto drawable = entity.component<CDrawable>();
 
         sf::Transformable physics_transformable;
         physics_transformable.setPosition(toPixels({position->x, position->y}));
         physics_transformable.setScale(kPixelsPerMeter, kPixelsPerMeter);
         physics_transformable.setRotation(rotation->degrees);
-        target_->draw(*drawable, physics_transformable.getTransform());
+        target_->draw(*(drawable->drawable), physics_transformable.getTransform());
     }
 }
 

@@ -1,5 +1,5 @@
-#ifndef AS_CONVERSIONS_HH
-#define AS_CONVERSIONS_HH
+#ifndef FL_CONVERSIONS_HH
+#define FL_CONVERSIONS_HH
 
 #include <Box2D/Box2D.h>
 #include <SFML/Graphics.hpp>
@@ -35,5 +35,5 @@ inline auto toPixels(const b2Vec2 &v) -> sf::Vector2f {
 
 } /* namespace fl */
 
-#endif /* AS_CONVERSIONS_HH */
+#endif /* FL_CONVERSIONS_HH */
 

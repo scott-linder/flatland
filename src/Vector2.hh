@@ -1,5 +1,5 @@
-#ifndef AS_VECTOR2_HH
-#define AS_VECTOR2_HH
+#ifndef FL_VECTOR2_HH
+#define FL_VECTOR2_HH
 
 #include <Box2D/Box2D.h>
 #include <SFML/Graphics.hpp>
@@ -49,5 +49,5 @@ private:
 
 } /* namespace fl */
 
-#endif /* AS_VECTOR2_HH */
+#endif /* FL_VECTOR2_HH */
 

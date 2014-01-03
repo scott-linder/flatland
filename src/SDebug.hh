@@ -1,5 +1,5 @@
-#ifndef AS_SDEBUG_HH
-#define AS_SDEBUG_HH
+#ifndef FL_SDEBUG_HH
+#define FL_SDEBUG_HH
 
 #include <iostream>
 #include <entityx/entityx.h>
@@ -29,5 +29,5 @@ private:
 
 } /* namespace fl */
 
-#endif /* AS_SDEBUG_HH */
+#endif /* FL_SDEBUG_HH */
 

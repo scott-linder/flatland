@@ -1,5 +1,5 @@
-#ifndef AS_CDRAWABLE_HH
-#define AS_CDRAWABLE_HH
+#ifndef FL_CDRAWABLE_HH
+#define FL_CDRAWABLE_HH
 
 #include <memory>
 #include <entityx/entityx.h>
@@ -22,5 +22,5 @@ struct CDrawable : entityx::Component<CDrawable> {
 
 } /* namespace fl */
 
-#endif /* AS_CDRAWABLE_HH */
+#endif /* FL_CDRAWABLE_HH */
 

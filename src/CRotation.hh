@@ -1,5 +1,5 @@
-#ifndef AS_ANGLE_HH
-#define AS_ANGLE_HH
+#ifndef FL_ANGLE_HH
+#define FL_ANGLE_HH
 
 #include <entityx/entityx.h>
 #include <Box2D/Box2D.h>
@@ -18,5 +18,5 @@ struct CRotation : public entityx::Component<CRotation> {
 
 } /* namespace fl */
 
-#endif /* AS_ANGLE_HH */
+#endif /* FL_ANGLE_HH */
 

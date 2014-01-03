@@ -1,5 +1,5 @@
-#ifndef AS_SDRAW_HH
-#define AS_SDRAW_HH
+#ifndef FL_SDRAW_HH
+#define FL_SDRAW_HH
 
 #include <entityx/entityx.h>
 #include <SFML/Graphics.hpp>
@@ -27,5 +27,5 @@ private:
 
 } /* namespace fl */
 
-#endif /* AS_SDRAW_HH */
+#endif /* FL_SDRAW_HH */
 

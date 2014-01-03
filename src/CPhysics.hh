@@ -1,5 +1,5 @@
-#ifndef AS_PHYSICS_HH
-#define AS_PHYSICS_HH
+#ifndef FL_PHYSICS_HH
+#define FL_PHYSICS_HH
 
 #include <entityx/entityx.h>
 #include <Box2D/Box2D.h>
@@ -21,5 +21,5 @@ struct CPhysics : public entityx::Component<CPhysics> {
 
 } /* namespace fl */
 
-#endif /* AS_PHYSICS_HH */
+#endif /* FL_PHYSICS_HH */
 

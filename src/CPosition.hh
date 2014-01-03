@@ -1,5 +1,5 @@
-#ifndef AS_POSITION_HH
-#define AS_POSITION_HH
+#ifndef FL_POSITION_HH
+#define FL_POSITION_HH
 
 #include <entityx/entityx.h>
 #include <Box2D/Box2D.h>
@@ -19,5 +19,5 @@ struct CPosition : public entityx::Component<CPosition> {
 
 } /* namespace fl */
 
-#endif /* AS_POSITION_HH */
+#endif /* FL_POSITION_HH */
 

@@ -1,5 +1,5 @@
-#ifndef AS_SPHYSICS_HH
-#define AS_SPHYSICS_HH
+#ifndef FL_SPHYSICS_HH
+#define FL_SPHYSICS_HH
 
 #include <memory>
 #include <vector>
@@ -42,5 +42,5 @@ private:
 
 } /* namespace fl */
 
-#endif /* AS_SPHYSICS_HH */
+#endif /* FL_SPHYSICS_HH */
 

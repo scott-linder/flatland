@@ -1,5 +1,5 @@
-#ifndef AS_ECOLLISION_HH
-#define AS_ECOLLISION_HH
+#ifndef FL_ECOLLISION_HH
+#define FL_ECOLLISION_HH
 
 #include <entityx/entityx.h>
 
@@ -16,5 +16,5 @@ struct ECollision : entityx::Event<ECollision> {
 
 } /* namespace fl */
 
-#endif /* AS_ECOLLISION_HH */
+#endif /* FL_ECOLLISION_HH */
 

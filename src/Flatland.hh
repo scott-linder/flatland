@@ -1,5 +1,5 @@
-#ifndef AS_ASTEROIDS_HH
-#define AS_ASTEROIDS_HH
+#ifndef FL_ASTEROIDS_HH
+#define FL_ASTEROIDS_HH
 
 #include <memory>
 #include <entityx/entityx.h>
@@ -52,5 +52,5 @@ private:
 
 } /* namespace fl */
 
-#endif /* AS_ASTEROIDS_HH */
+#endif /* FL_ASTEROIDS_HH */
 

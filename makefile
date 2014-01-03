@@ -7,7 +7,7 @@ BIN=flatland
 IN=src/
 OUT=obj/
 
-OBJS=main Flatland Vector2
+OBJS=main Flatland Vector2 Factory
 OBJS+=CPhysics CPosition CRotation CDrawable
 OBJS+=SPhysics SDebug SDraw
 OBJS+=ECollision

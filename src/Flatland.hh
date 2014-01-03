@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
 #include "Vector2.hh"
+#include "Factory.hh"
 #include "ECollision.hh"
 
 namespace fl {
@@ -24,8 +25,6 @@ public:
     ~Flatland();
     /// Respond to a collision between physical entities.
     auto receive(const fl::ECollision &event) -> void;
-    /// Create a new physical entity.
-    auto createEntity(Vector2 position, bool dynamic) -> void;
 protected:
     /// Setup entity systems and event subscriptions.
     auto configure() -> void;
@@ -48,6 +47,8 @@ private:
     entityx::ptr<entityx::EntityManager> entities_;
     /// System manager.
     entityx::ptr<entityx::SystemManager> systems_;
+    /// Entity factory
+    std::shared_ptr<Factory> factory_;
 };
 
 } /* namespace fl */

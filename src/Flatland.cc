@@ -5,6 +5,7 @@
 #include <Box2D/Box2D.h>
 #include "util.hh"
 #include "Vector2.hh"
+#include "Factory.hh"
 #include "CPosition.hh"
 #include "CRotation.hh"
 #include "CPhysics.hh"
@@ -28,6 +29,7 @@ Flatland::Flatland(std::shared_ptr<sf::RenderTarget> target,
     , events_(events)
     , entities_(entities)
     , systems_(systems)
+    , factory_(std::make_shared<Factory>(world_, entities_))
 {}
 
 Flatland::~Flatland()
@@ -41,40 +43,9 @@ auto Flatland::configure() -> void {
     events_->subscribe<fl::ECollision>(*this);
 }
 
-/**
- * \param position Where the entity should enter the world, expressed in 
- * meters relative to the origin.
- * \param dynamic Whether the entity should respond to physical stimulus.
- */
-auto Flatland::createEntity(Vector2 position, bool dynamic) -> void {
-    auto entity = entities_->create();
-
-    auto draw_shape = std::unique_ptr<sf::Drawable>(new sf::CircleShape(0.5f));
-
-    /*
-    b2PolygonShape phys_shape;
-    phys_shape.Set(shape, shape.count);
-    */
-    b2CircleShape phys_shape;
-    phys_shape.m_radius = 0.5f;
-
-    b2BodyDef phys_body_def;
-    phys_body_def.type = dynamic ? b2_dynamicBody : b2_staticBody;
-    phys_body_def.position = position;
-    auto phys_body = std::shared_ptr<b2Body>(world_->CreateBody(&phys_body_def),
-            [this](b2Body *body)
-            { delete static_cast<entityx::Entity*>(body->GetUserData());
-                world_->DestroyBody(body); });
-    phys_body->CreateFixture(&phys_shape, 1.0f);
-    phys_body->SetUserData(new entityx::Entity(entity));
-
-    entity.assign<CPhysics>(phys_body);
-    entity.assign<CDrawable>(std::move(draw_shape));
-}
-
 auto Flatland::initialize() -> void {
-    createEntity({0.0f, 0.0f}, true);
-    createEntity({0.0f, -3.0f}, false);
+    factory_->physicsEntity({0.0f, 0.0f}, true, sf::Color::Blue);
+    factory_->physicsEntity({0.0f, -3.0f}, false, sf::Color::Red);
 }
 
 auto Flatland::update(double dt) -> void {
